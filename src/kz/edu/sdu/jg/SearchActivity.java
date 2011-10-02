@@ -40,6 +40,30 @@ public class SearchActivity extends Activity implements AdapterView.OnItemClickL
       ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.searchtypes, android.R.layout.simple_spinner_item);
       adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
       spinner.setAdapter(adapter);
+      resultlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+         @Override
+         public void onItemSelected(AdapterView< ? > parent, View view, int pos, long id) {
+            if (type == COMPANY_TYPE) {
+               Intent i = new Intent(view.getContext(), DetailActivity.class);
+               Company c = (Company) result.get(pos);
+               i.putExtra("COMPANY", c);
+               startActivity(i);
+            } else if (type == CATEGORY_TYPE) {
+               Intent i = new Intent(view.getContext(), CategoryActivity.class);
+               Category c = (Category) result.get(pos);
+               i.putExtra("CATEGORY", c);
+               startActivity(i);
+            }
+         }
+
+         @Override
+         public void onNothingSelected(AdapterView< ? > arg0) {
+            // TODO Auto-generated method stub
+
+         }
+
+      });
       resultlist.setOnItemClickListener(this);
 
       Button b = (Button) findViewById(R.id.searchbutton);
@@ -108,7 +132,7 @@ public class SearchActivity extends Activity implements AdapterView.OnItemClickL
          i.putExtra("COMPANY", c);
          startActivity(i);
       } else if (type == CATEGORY_TYPE) {
-         Intent i = new Intent(view.getContext(), CategoriesScreen.class);
+         Intent i = new Intent(view.getContext(), CategoryActivity.class);
          Category c = (Category) result.get(pos);
          i.putExtra("CATEGORY", c);
          startActivity(i);

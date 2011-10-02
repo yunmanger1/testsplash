@@ -28,9 +28,9 @@ public class CategoryActivity extends Activity {
       data = new HashMap<Character, List<Category>>();
       try {
          ParseUtils pu = new ParseUtils();
-         data.put('a', pu.getAlmatyCategoriesByLetter('a'));
-         List<Category> lst = data.get('a');
-         lastChar = 'a';
+         data.put('а', pu.getAlmatyCategoriesByLetter('а'));
+         List<Category> lst = data.get('а');
+         lastChar = 'а';
          CATEGORIES = new String[lst.size()];
          int k = 0;
          for (Category cat : lst) {
@@ -42,17 +42,13 @@ public class CategoryActivity extends Activity {
       ListView lv = (ListView) this.findViewById(R.id.listView1);
       lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, CATEGORIES));
       lv.setTextFilterEnabled(true);
-      lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
          @Override
-         public void onItemSelected(AdapterView parent, View child, int pos, long id) {
+         public void onItemClick(AdapterView arg0, View arg1, int pos, long arg3) {
             Intent intent = new Intent(CategoryActivity.this, CompanyActivity.class);
-            intent.putExtra("cat_id", data.get('c').get(pos).id);
-            startActivityForResult(intent, 777);
-         }
-
-         @Override
-         public void onNothingSelected(AdapterView parent) {
+            intent.putExtra("CATEGORY", data.get(lastChar).get(pos));
+            startActivity(intent);
 
          }
 

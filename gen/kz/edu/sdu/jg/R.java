@@ -20,9 +20,9 @@ public final class R {
         public static final int splash=0x7f020002;
     }
     public static final class id {
-        public static final int SplashImageView=0x7f070021;
-        public static final int button0=0x7f07001f;
-        public static final int button1=0x7f070020;
+        public static final int SplashImageView=0x7f070022;
+        public static final int button0=0x7f070020;
+        public static final int button1=0x7f070021;
         public static final int button10=0x7f07000a;
         public static final int button11=0x7f07000b;
         public static final int button12=0x7f07000c;
@@ -53,14 +53,14 @@ public final class R {
         public static final int button9=0x7f070009;
         public static final int linearLayout1=0x7f070001;
         public static final int listView1=0x7f07001e;
+        public static final int listView2=0x7f07001f;
         public static final int scrollView1=0x7f070000;
     }
     public static final class layout {
         public static final int categories=0x7f030000;
         public static final int companies=0x7f030001;
-        public static final int details=0x7f030002;
-        public static final int main=0x7f030003;
-        public static final int splash=0x7f030004;
+        public static final int main=0x7f030002;
+        public static final int splash=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f050000;

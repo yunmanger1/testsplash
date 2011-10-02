@@ -19,7 +19,7 @@ public class MainMenu extends Activity {
          case R.id.button0 :
             break;
          case R.id.button1 :
-            Intent catIntent = new Intent(MainMenu.this, CategoriesScreen.class);
+            Intent catIntent = new Intent(MainMenu.this, CategoryActivity.class);
             MainMenu.this.startActivity(catIntent);
       }
    }

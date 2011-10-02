@@ -6,4 +6,5 @@
   android:layout_height="match_parent">
     <ListView android:id="@+id/listView2" android:layout_height="match_parent" android:layout_width="fill_parent" />
     
+    
 </LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="searchtypes">
+        <item>По названию</item>
+        <item>По адресу</item>
+        <item>По телефону</item>
+        <item>По виду деятельности</item>
+    </string-array>
+</resources>

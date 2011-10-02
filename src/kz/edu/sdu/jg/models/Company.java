@@ -1,10 +1,11 @@
 package kz.edu.sdu.jg.models;
 
-public class Company {
+import java.io.Serializable;
+
+public class Company implements Serializable {
    public Integer id;
    public String name;
    public String content;
    public String url;
    public Category category;
 }
-

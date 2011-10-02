@@ -40,6 +40,21 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+		<activity 	android:name=".SearchActivity"
+        			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 
+            <intent-filter>
+                <action android:name="kz.edu.sdu.jg.SearchActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity 	android:name=".DetailActivity"
+        			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+
+            <intent-filter>
+                <action android:name="kz.edu.sdu.jg.DetailActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>

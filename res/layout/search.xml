@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout1">
+        <EditText android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="wrap_content" android:id="@+id/searchText">
+            <requestFocus></requestFocus>
+        </EditText>
+        <Button android:id="@+id/searchbutton" android:layout_height="wrap_content" android:text="Go" android:layout_width="wrap_content"></Button>
+    </LinearLayout>
+    <Spinner 	android:layout_width="match_parent" 
+    			android:layout_height="wrap_content" 
+    			android:id="@+id/searchspinner"
+    			android:drawSelectorOnTop="true"
+    			android:prompt="@string/search_type">
+    </Spinner>
+    <ListView android:layout_height="wrap_content" android:id="@+id/resultlist" android:layout_width="match_parent"></ListView>
+</LinearLayout>

@@ -17,6 +17,8 @@ public class MainMenu extends Activity {
    public void buttonClick(View view) {
       switch (view.getId()) {
          case R.id.button0 :
+            Intent searchIntent = new Intent(MainMenu.this, SearchActivity.class);
+            MainMenu.this.startActivity(searchIntent);
             break;
          case R.id.button1 :
             Intent catIntent = new Intent(MainMenu.this, CategoriesScreen.class);

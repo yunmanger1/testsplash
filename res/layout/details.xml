@@ -4,5 +4,7 @@
   android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
+    <TextView android:id="@+id/detailtitle" android:layout_height="wrap_content" android:text="TextView" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="fill_parent"></TextView>
+    <TextView android:text="TextView" android:id="@+id/detailview" android:layout_width="fill_parent" android:layout_height="fill_parent"></TextView>
     
 </LinearLayout>

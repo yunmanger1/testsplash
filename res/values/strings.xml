@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SplashScreen</string>
+    <string name="app_name">Yellow Pages</string>
     <string name="main_screen">MainScreen</string>
     <string name="splash_screen">SplashScreen</string>
-    <string name="search_type">Искать по</string>    
+    <string name="search_type">Искать по</string>
+    <string name="description">Almaty Yellow Pages</string>
 </resources>

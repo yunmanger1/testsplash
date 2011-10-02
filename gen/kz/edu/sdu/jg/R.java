@@ -75,6 +75,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f060000;
+        public static final int description=0x7f060004;
         public static final int main_screen=0x7f060001;
         public static final int search_type=0x7f060003;
         public static final int splash_screen=0x7f060002;

@@ -35,5 +35,5 @@
     		<Button android:text="Я" android:onClick="buttonClick" android:textSize="32px" android:id="@+id/button29" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
     	</LinearLayout>
     </HorizontalScrollView>
-    <ListView android:id="@+id/listView1" android:layout_height="match_parent" android:layout_width="fill_parent" />
+    <ListView android:id="@+id/listView1" android:layout_height="match_parent" android:layout_width="fill_parent" />    
 </LinearLayout>

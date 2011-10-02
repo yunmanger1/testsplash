@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -126,16 +127,16 @@ public class ParseUtils {
       return result;
    }
 
-   /* public static void main(String[] args) throws IOException {
-       Properties props = System.getProperties();
-       props.put("http.proxyHost", "192.168.1.88");
-       props.put("http.proxyPort", "3128");
-       ParseUtils pu = new ParseUtils();
-       Category cat = new Category();
-       cat.url = "/kz/ru/companies/30/00056/";
-   //      root
-       for (Company c : pu.getCategoryDetail(cat)) {
-          System.out.println(c.name);
-       }
-    }*/
+   public static void main(String[] args) throws IOException {
+      Properties props = System.getProperties();
+      props.put("http.proxyHost", "192.168.1.88");
+      props.put("http.proxyPort", "3128");
+      ParseUtils pu = new ParseUtils();
+      Category cat = new Category();
+      cat.url = "/kz/ru/companies/30/00056/";
+//      root
+      for (Company c : pu.getCategoryDetail(cat)) {
+         System.out.println(c.name);
+      }
+   }
 }

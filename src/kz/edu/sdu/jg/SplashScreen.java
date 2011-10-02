@@ -30,7 +30,7 @@ public class SplashScreen extends Activity {
                // do nothing
             } finally {
                finish();
-               startActivity(new Intent("kz.edu.sdu.jg.TestActivity"));
+               startActivity(new Intent("kz.edu.sdu.jg.MainMenu"));
                stop();
             }
          }

@@ -1,39 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
-    <HorizontalScrollView android:layout_height="52px" android:id="@+id/scrollView1" android:layout_width="match_parent">
-        <LinearLayout android:id="@+id/linearLayout1" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-        	<Button android:text="А" android:textSize="32px" android:id="@+id/button2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Б" android:textSize="32px" android:id="@+id/button3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="В" android:textSize="32px" android:id="@+id/button4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Г" android:textSize="32px" android:id="@+id/button5" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Д" android:textSize="32px" android:id="@+id/button6" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Ё" android:textSize="32px" android:id="@+id/button7" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Ж" android:textSize="32px" android:id="@+id/button8" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="З" android:textSize="32px" android:id="@+id/button9" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="И" android:textSize="32px" android:id="@+id/button10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="К" android:textSize="32px" android:id="@+id/button11" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Л" android:textSize="32px" android:id="@+id/button12" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="М" android:textSize="32px" android:id="@+id/button13" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Н" android:textSize="32px" android:id="@+id/button14" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="О" android:textSize="32px" android:id="@+id/button15" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="П" android:textSize="32px" android:id="@+id/button16" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Р" android:textSize="32px" android:id="@+id/button17" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="С" android:textSize="32px" android:id="@+id/button18" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Т" android:textSize="32px" android:id="@+id/button19" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="У" android:textSize="32px" android:id="@+id/button20" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Ф" android:textSize="32px" android:id="@+id/button21" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Х" android:textSize="32px" android:id="@+id/button22" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Ц" android:textSize="32px" android:id="@+id/button23" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Ч" android:textSize="32px" android:id="@+id/button24" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Ш" android:textSize="32px" android:id="@+id/button25" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Щ" android:textSize="32px" android:id="@+id/button26" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Э" android:textSize="32px" android:id="@+id/button27" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Ю" android:textSize="32px" android:id="@+id/button28" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    		<Button android:text="Я" android:textSize="32px" android:id="@+id/button29" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
-    	</LinearLayout>
-    </HorizontalScrollView>
-    <ListView android:id="@+id/listView1" android:layout_height="match_parent" android:layout_width="fill_parent" />
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <Button android:text="Поиск" android:textSize="32px" android:id="@+id/button0" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
+    <Button android:text="Категории" android:textSize="32px" android:id="@+id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:height="50px" android:width="50px"></Button>
 </LinearLayout>

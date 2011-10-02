@@ -50,7 +50,7 @@ public class SearchActivity extends Activity {
                i.putExtra("COMPANY", c);
                startActivity(i);
             } else if (type == CATEGORY_TYPE) {
-               Intent i = new Intent(view.getContext(), CategoriesScreen.class);
+               Intent i = new Intent(view.getContext(), CategoryActivity.class);
                Category c = (Category) result.get(pos);
                i.putExtra("CATEGORY", c);
                startActivity(i);

@@ -18,8 +18,10 @@ import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 
 public class ParseUtils {
-   static Pattern CAT_RE = Pattern.compile("javascript:rubric\\('(\\d+)'\\)");
-   static Pattern COM_RE = Pattern.compile("javascript:rubrics\\('(\\d+)'\\)");
+//   static Pattern CAT_RE = Pattern.compile("javascript:rubric\\('(\\d+)'\\)");
+//   static Pattern COM_RE = Pattern.compile("javascript:rubrics\\('(\\d+)'\\)");
+   static Pattern CAT_RE = Pattern.compile("/kz/ru/companies/\\d+/(\\d+)/");
+   static Pattern COM_RE = Pattern.compile("/kz/ru/rubrics/(\\d+)/");
    static Pattern RES_RE = Pattern.compile("Результатов по Вашему запросу: <b>(\\d+)</b>");
 
    private static final String PHONE_SEARCH = "%s/kz/ru/phone_search/%d/%d/%s/";

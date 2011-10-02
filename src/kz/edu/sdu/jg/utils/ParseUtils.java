@@ -2,9 +2,10 @@ package kz.edu.sdu.jg.utils;
 
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +21,7 @@ public class ParseUtils {
    static Pattern COM_RE = Pattern.compile("javascript:rubrics\\('(\\d+)'\\)");
    static String CAT_FMT = "/kz/ru/companies/%d/%s/";
    static String COM_FMT = "/kz/ru/rubrics/%s/";
+   static String DOMAIN = "http://yellow-pages.kz";
 
    TagNode rootNode;
    HtmlCleaner cleaner;
@@ -33,7 +35,7 @@ public class ParseUtils {
       rootNode = cleaner.clean(htmlPage);
    }
 
-   public int fetchCompaniesByURL(List<Company> result) {
+   private int fetchCompanies(List<Company> result) {
       int count = 0;
       List<TagNode> options = rootNode.getElementListHavingAttribute("href", true);
       for (TagNode opt : options) {
@@ -69,9 +71,9 @@ public class ParseUtils {
 
    public List<Company> getCategoryDetail(Category cat) throws IOException {
       List<Company> result = new ArrayList<Company>();
-      String html = UrlUtils.readURL(new URL("http://yellow-pages.kz" + cat.url));
+      String html = UrlUtils.readURL(new URL(DOMAIN + cat.url));
       rootNode = cleaner.clean(html);
-      int cnt = fetchCompaniesByURL(result);
+      int cnt = fetchCompanies(result);
       if (cnt >= 15) {
          Pattern c = Pattern.compile("Результатов по Вашему запросу: <b>(\\d+)</b>");
          Matcher m = c.matcher(html);
@@ -79,8 +81,8 @@ public class ParseUtils {
             int k = Integer.valueOf(m.group(1));
             int n = k / 15;
             for (int page = 2; page <= n; page++) {
-               rootNode = cleaner.clean(UrlUtils.readURL(new URL("http://yellow-pages.kz" + cat.url + page + '/')));
-               fetchCompaniesByURL(result);
+               rootNode = cleaner.clean(UrlUtils.readURL(new URL(DOMAIN + cat.url + page + '/')));
+               fetchCompanies(result);
             }
          }
       }
@@ -89,7 +91,7 @@ public class ParseUtils {
    }
 
    public List<City> getAllCities() throws IOException {
-      String urlAddr = "http://yellow-pages.kz/kz/ru/address_search/";
+      String urlAddr = DOMAIN + "/kz/ru/address_search/";
       List<City> result = new ArrayList<City>();
       rootNode = cleaner.clean(new URL(urlAddr));
       List<TagNode> options = rootNode.getElementListByName("option", true);
@@ -107,10 +109,32 @@ public class ParseUtils {
       return getCityCategories(30);
    }
 
+   public List<Category> getAlmatyCategoriesByLetter(char c) throws IOException {
+      return getCityCategoriesByLetter(30, c);
+   }
+
    public List<Category> getCityCategories(int city) throws IOException {
-      String urlAddr = String.format("http://yellow-pages.kz/kz/ru/index_search/%d/?|all|/", city);
+      String urlAddr = String.format(DOMAIN + "/kz/ru/index_search/%d/?|all|/", city);
       List<Category> result = new ArrayList<Category>();
       rootNode = cleaner.clean(new URL(urlAddr));
+      fetchCategories(city, result);
+      return result;
+   }
+
+   public List<Category> getCityCategoriesByLetter(int city, char c) throws IOException {
+      List<Category> result = new ArrayList<Category>();
+      String cc = "" + Character.toUpperCase(c);
+      try {
+         String urlAddr = String.format("%s/kz/ru/index_search/%d/?|%s|/", DOMAIN, city, URLEncoder.encode(cc, "cp1251"));
+         rootNode = cleaner.clean(new URL(urlAddr));
+         fetchCategories(city, result);
+      } catch (UnsupportedCharsetException e) {
+         e.printStackTrace();
+      }
+      return result;
+   }
+
+   private void fetchCategories(int city, List<Category> result) {
       List<TagNode> links = rootNode.getElementListHavingAttribute("href", true);
       for (TagNode link : links) {
          String href = link.getAttributeByName("href");
@@ -124,18 +148,15 @@ public class ParseUtils {
             result.add(tmp);
          }
       }
-      return result;
    }
 
    public static void main(String[] args) throws IOException {
-      Properties props = System.getProperties();
-      props.put("http.proxyHost", "192.168.1.88");
-      props.put("http.proxyPort", "3128");
+//      Properties props = System.getProperties();
+//      props.put("http.proxyHost", "192.168.1.88");
+//      props.put("http.proxyPort", "3128");
       ParseUtils pu = new ParseUtils();
-      Category cat = new Category();
-      cat.url = "/kz/ru/companies/30/00056/";
-//      root
-      for (Company c : pu.getCategoryDetail(cat)) {
+
+      for (Category c : pu.getCityCategoriesByLetter(30, 'Б')) {
          System.out.println(c.name);
       }
    }

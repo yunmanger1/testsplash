@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-public class SearchActivity extends Activity {
+public class SearchActivity extends Activity implements AdapterView.OnItemClickListener {
    static final int COMPANY_TYPE = 1;
    static final int CATEGORY_TYPE = 2;
    Spinner spinner;
@@ -40,30 +40,7 @@ public class SearchActivity extends Activity {
       ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.searchtypes, android.R.layout.simple_spinner_item);
       adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
       spinner.setAdapter(adapter);
-      resultlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-         @Override
-         public void onItemSelected(AdapterView< ? > parent, View view, int pos, long id) {
-            if (type == COMPANY_TYPE) {
-               Intent i = new Intent(view.getContext(), DetailActivity.class);
-               Company c = (Company) result.get(pos);
-               i.putExtra("COMPANY", c);
-               startActivity(i);
-            } else if (type == CATEGORY_TYPE) {
-               Intent i = new Intent(view.getContext(), CategoriesScreen.class);
-               Category c = (Category) result.get(pos);
-               i.putExtra("CATEGORY", c);
-               startActivity(i);
-            }
-         }
-
-         @Override
-         public void onNothingSelected(AdapterView< ? > arg0) {
-            // TODO Auto-generated method stub
-
-         }
-
-      });
+      resultlist.setOnItemClickListener(this);
 
       Button b = (Button) findViewById(R.id.searchbutton);
       b.setOnClickListener(new View.OnClickListener() {
@@ -117,8 +94,24 @@ public class SearchActivity extends Activity {
                }
                resultlist.setAdapter(new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_list_item_1, strings));
                resultlist.setTextFilterEnabled(true);
+               resultlist.setOnItemClickListener(SearchActivity.this);
             }
          }
       });
+   }
+
+   @Override
+   public void onItemClick(AdapterView< ? > parent, View view, int pos, long id) {
+      if (type == COMPANY_TYPE) {
+         Intent i = new Intent(this, DetailActivity.class);
+         Company c = (Company) result.get(pos);
+         i.putExtra("COMPANY", c);
+         startActivity(i);
+      } else if (type == CATEGORY_TYPE) {
+         Intent i = new Intent(view.getContext(), CategoriesScreen.class);
+         Category c = (Category) result.get(pos);
+         i.putExtra("CATEGORY", c);
+         startActivity(i);
+      }
    }
 }

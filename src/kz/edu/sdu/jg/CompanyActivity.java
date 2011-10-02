@@ -7,13 +7,16 @@ import kz.edu.sdu.jg.models.Category;
 import kz.edu.sdu.jg.models.Company;
 import kz.edu.sdu.jg.utils.ParseUtils;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class CompanyActivity extends Activity {
    static Category cat = null;
-   static List<Company> com;
+   static List<Company> lst = null;
    static String[] COMPANIES = null;
 
    @Override
@@ -24,7 +27,7 @@ public class CompanyActivity extends Activity {
       cat = (Category) getIntent().getExtras().get("CATEGORY");
       if (cat != null) {
          try {
-            List<Company> lst = pu.getCategoryDetail(cat);
+            lst = pu.getCategoryDetail(cat);
             COMPANIES = new String[lst.size()];
             int k = 0;
             for (Company cat : lst) {
@@ -36,6 +39,18 @@ public class CompanyActivity extends Activity {
          ListView lv = (ListView) this.findViewById(R.id.listView2);
          lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, COMPANIES));
          lv.setTextFilterEnabled(true);
+
+         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView arg0, View arg1, int pos, long arg3) {
+               Intent intent = new Intent(CompanyActivity.this, DetailActivity.class);
+               intent.putExtra("COMPANY", lst.get(pos));
+               startActivity(intent);
+
+            }
+
+         });
       }
    }
 }

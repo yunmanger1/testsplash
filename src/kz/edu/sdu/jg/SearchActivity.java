@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-public class SearchActivity extends Activity {
+public class SearchActivity extends Activity implements AdapterView.OnItemClickListener {
    static final int COMPANY_TYPE = 1;
    static final int CATEGORY_TYPE = 2;
    Spinner spinner;
@@ -64,6 +64,7 @@ public class SearchActivity extends Activity {
          }
 
       });
+      resultlist.setOnItemClickListener(this);
 
       Button b = (Button) findViewById(R.id.searchbutton);
       b.setOnClickListener(new View.OnClickListener() {
@@ -117,8 +118,24 @@ public class SearchActivity extends Activity {
                }
                resultlist.setAdapter(new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_list_item_1, strings));
                resultlist.setTextFilterEnabled(true);
+               resultlist.setOnItemClickListener(SearchActivity.this);
             }
          }
       });
+   }
+
+   @Override
+   public void onItemClick(AdapterView< ? > parent, View view, int pos, long id) {
+      if (type == COMPANY_TYPE) {
+         Intent i = new Intent(this, DetailActivity.class);
+         Company c = (Company) result.get(pos);
+         i.putExtra("COMPANY", c);
+         startActivity(i);
+      } else if (type == CATEGORY_TYPE) {
+         Intent i = new Intent(view.getContext(), CategoryActivity.class);
+         Category c = (Category) result.get(pos);
+         i.putExtra("CATEGORY", c);
+         startActivity(i);
+      }
    }
 }

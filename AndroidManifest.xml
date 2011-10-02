@@ -20,7 +20,7 @@
         			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 
             <intent-filter>
-                <action android:name="kz.edu.sdu.jg.SplashScreen" />
+                <action android:name="kz.edu.sdu.jg.MainMenu" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -28,7 +28,7 @@
         			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 
             <intent-filter>
-                <action android:name="kz.edu.sdu.jg.MainMenu" />
+                <action android:name="kz.edu.sdu.jg.CategoriesScreen" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

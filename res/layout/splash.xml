@@ -11,5 +11,5 @@
         android:layout_gravity="center"        
         android:src="@drawable/splash"
         >
-    </ImageView>
+    </ImageView>    
 </LinearLayout>

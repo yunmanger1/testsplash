@@ -1,6 +1,7 @@
 package kz.edu.sdu.jg.utils;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.UnsupportedCharsetException;
@@ -19,6 +20,13 @@ import org.htmlcleaner.TagNode;
 public class ParseUtils {
    static Pattern CAT_RE = Pattern.compile("javascript:rubric\\('(\\d+)'\\)");
    static Pattern COM_RE = Pattern.compile("javascript:rubrics\\('(\\d+)'\\)");
+   static Pattern RES_RE = Pattern.compile("Результатов по Вашему запросу: <b>(\\d+)</b>");
+
+   private static final String PHONE_SEARCH = "%s/kz/ru/phone_search/%d/%d/%s/";
+   private static final String ADDRESS_SEARCH = "%s/kz/ru/address_search/%d/%d/?%s/%s/";
+   private static final String NAME_SEARCH = "%s/kz/ru/name_search/%d/%d/?%s/";
+   private static final String CAT_NAME_SEARCH = "%s/kz/ru/activity_search/%d/?%s/";
+
    static String CAT_FMT = "/kz/ru/companies/%d/%s/";
    static String COM_FMT = "/kz/ru/rubrics/%s/";
    static String DOMAIN = "http://yellow-pages.kz";
@@ -125,7 +133,7 @@ public class ParseUtils {
       List<Category> result = new ArrayList<Category>();
       String cc = "" + Character.toUpperCase(c);
       try {
-         String urlAddr = String.format("%s/kz/ru/index_search/%d/?|%s|/", DOMAIN, city, URLEncoder.encode(cc, "cp1251"));
+         String urlAddr = String.format("%s/kz/ru/index_search/%d/?|%s|/", DOMAIN, city, _u(cc));
          rootNode = cleaner.clean(new URL(urlAddr));
          fetchCategories(city, result);
       } catch (UnsupportedCharsetException e) {
@@ -150,13 +158,97 @@ public class ParseUtils {
       }
    }
 
+   public static String _u(String s) {
+      try {
+         return URLEncoder.encode(s, "cp1251");
+      } catch (UnsupportedEncodingException e) {
+         return s;
+      }
+   }
+
+   public List<Company> searchCompaniesByPhone(int city, String phone) throws IOException {
+      int page = 1;
+      List<Company> result = new ArrayList<Company>();
+      String url = String.format(PHONE_SEARCH, DOMAIN, city, page, _u(phone));
+      String html = UrlUtils.readURL(new URL(url));
+      rootNode = cleaner.clean(html);
+      int cnt = fetchCompanies(result);
+      if (cnt >= 15) {
+         Matcher m = RES_RE.matcher(html);
+         if (m.find()) {
+            int k = Integer.valueOf(m.group(1));
+            int n = k / 15;
+            for (page = 2; page <= n; page++) {
+               rootNode = cleaner.clean(new URL(String.format(PHONE_SEARCH, DOMAIN, city, page, phone)));
+               fetchCompanies(result);
+            }
+         }
+      }
+      return result;
+   }
+
+   public List<Company> searchCompaniesByAddress(int city, String street, String house) throws IOException {
+      int page = 1;
+      List<Company> result = new ArrayList<Company>();
+      String url = String.format(ADDRESS_SEARCH, DOMAIN, city, page, _u(street), _u(house));
+      String html = UrlUtils.readURL(new URL(url));
+      rootNode = cleaner.clean(html);
+      int cnt = fetchCompanies(result);
+      if (cnt >= 15) {
+         Matcher m = RES_RE.matcher(html);
+         if (m.find()) {
+            int k = Integer.valueOf(m.group(1));
+            int n = k / 15;
+            for (page = 2; page <= n; page++) {
+               rootNode = cleaner.clean(new URL(String.format(ADDRESS_SEARCH, DOMAIN, city, page, _u(street), _u(house))));
+               fetchCompanies(result);
+            }
+         }
+      }
+      return result;
+   }
+
+   public List<Company> searchCompaniesByName(int city, String name) throws IOException {
+      int page = 1;
+      List<Company> result = new ArrayList<Company>();
+      String url = String.format(NAME_SEARCH, DOMAIN, city, page, _u(name));
+      String html = UrlUtils.readURL(new URL(url));
+      rootNode = cleaner.clean(html);
+      int cnt = fetchCompanies(result);
+      if (cnt >= 15) {
+         Matcher m = RES_RE.matcher(html);
+         if (m.find()) {
+            int k = Integer.valueOf(m.group(1));
+            int n = k / 15;
+            for (page = 2; page <= n; page++) {
+               rootNode = cleaner.clean(new URL(String.format(NAME_SEARCH, DOMAIN, city, page, _u(name))));
+               fetchCompanies(result);
+            }
+         }
+      }
+      return result;
+   }
+
+   ///kz/ru/activity_search/30/?%C1%C0%CD%CA/
+   public List<Category> searchCategoryByName(int city, String name) throws IOException {
+      List<Category> result = new ArrayList<Category>();
+      try {
+         String urlAddr = String.format(CAT_NAME_SEARCH, DOMAIN, city, _u(name));
+         rootNode = cleaner.clean(new URL(urlAddr));
+         fetchCategories(city, result);
+      } catch (UnsupportedCharsetException e) {
+         e.printStackTrace();
+      }
+      return result;
+   }
+
    public static void main(String[] args) throws IOException {
 //      Properties props = System.getProperties();
 //      props.put("http.proxyHost", "192.168.1.88");
 //      props.put("http.proxyPort", "3128");
       ParseUtils pu = new ParseUtils();
 
-      for (Category c : pu.getCityCategoriesByLetter(30, 'Б')) {
+      for (Category c : pu.searchCategoryByName(30, "БАНК")) {
          System.out.println(c.name);
       }
    }
